@@ -29,7 +29,7 @@ function App()
     return (
         <div>
             <h1>The Hedera Getter Setter</h1>
-            <button onClick={settingVariable}> {setVariable} </button>
+            <button onClick={settingVariable}> Setting </button>
             <button onClick={gettingVariable}> {getVariable} </button>
         </div>
 
