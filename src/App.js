@@ -1,25 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import { createFile, instantiateSmartContract, stateVariableUpdate, queryChanges } from './hbarsdk'
+import React, { useState } from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+function App()
+{
+    const [getVariable, funcGetVariable] = useState()
+    const [setVariable, funcSetVariable] = useState()
+
+    const createContractId = async function ()
+    {
+        const bytecodeFileId = await createFile()
+        const settingId = await instantiateSmartContract(bytecodeFileId)
+        return settingId
+    }
+
+    async function settingVariable()
+    {
+        const _temp = await stateVariableUpdate(createContractId, "Alive", 1111)
+        funcSetVariable(_temp)
+    }
+
+    async function gettingVariable()
+    {
+        const _temp = await queryChanges(createContractId, "Alice")
+        funcGetVariable(_temp)
+    }
+
+
+    return (
+        <div>
+            <h1>The Hedera Getter Setter</h1>
+            <button onClick={settingVariable}> {setVariable} </button>
+            <button onClick={gettingVariable}> {getVariable} </button>
+        </div>
+
+    )
 }
 
 export default App;
