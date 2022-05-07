@@ -16,8 +16,8 @@ const
 let client;
 async function createFile()
 {
-    const operatorId = AccountId.fromString("0.0.34194909")
-    const operatorKey = PrivateKey.fromString("302e020100300506032b657004220420f8a94c0825d5f1391f9874d71726897c580ab493bfb8bbd21a5385381f69ce78")
+    const operatorId = AccountId.fromString("Op_Key")
+    const operatorKey = PrivateKey.fromString("PV_KEY")
     client = Client.forTestnet().setOperator(operatorId, operatorKey)
     //Import the compiled bytecode
     const helloHedera = require("./Lookup.json")
